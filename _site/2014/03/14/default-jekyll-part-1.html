@@ -100,11 +100,9 @@
 
 <p>We will use <a href="http://pages.github.com">Github pages</a> to deploy our blog. Its a free service provided by Github under .io domain. </p>
 
-<p>To get started create an empty github directory with name same as your username.</p>
+<p>To get started create an empty github directory with name  as your <em>username</em>.github.io.</p>
 
-<p>Github has an auto-generator that keeps account of the repositiers under your username and deploys them to <username>.github.io/</p>
-
-<p>Note this username repository needs to have Jekyll source because Github is constrained to same. </p>
+<p>Note this username repository needs to have Jekyll source because Github is constrained to same. Github has an auto-generator that keeps account of the repositiers under your username and deploys them to <em>username</em>.github.io/</p>
 
 <p>Thereafter just initialize git in your local directory. </p>
 <div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>git init
@@ -113,7 +111,10 @@
 <div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>git add remote origin &lt;clone-url&gt;
 </code></pre></div>
 <p>Thats it commit the changes and push it.</p>
-<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>git commit -m <span class="s2">&quot;Initial Commit&quot;</span> <span class="o">&amp;&amp;</span> git push
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>git add . <span class="o">&amp;&amp;</span> git commit -m <span class="s2">&quot;Initial Commit&quot;</span> <span class="o">&amp;&amp;</span> git push
+</code></pre></div>
+<p>Above mentioned is just an one time process. Later you can change anything, create a new post and just run following command.</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="p">&amp;</span> git add . <span class="o">&amp;&amp;</span> git commit <span class="o">&amp;&amp;</span> git push
 </code></pre></div>
 
 

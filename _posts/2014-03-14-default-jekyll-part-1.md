@@ -92,11 +92,9 @@ Thats pretty much it. You can create a new post by creating a file in the `_post
 
 We will use [Github pages](http://pages.github.com) to deploy our blog. Its a free service provided by Github under .io domain. 
 
-To get started create an empty github directory with name same as your username.
+To get started create an empty github directory with name  as your *username*.github.io.
 
-Github has an auto-generator that keeps account of the repositiers under your username and deploys them to <username>.github.io/
-
-Note this username repository needs to have Jekyll source because Github is constrained to same. 
+Note this username repository needs to have Jekyll source because Github is constrained to same. Github has an auto-generator that keeps account of the repositiers under your username and deploys them to *username*.github.io/
 
 Thereafter just initialize git in your local directory. 
 
@@ -113,8 +111,13 @@ $ git add remote origin <clone-url>
 Thats it commit the changes and push it.
 
 ```bash
-$ git commit -m "Initial Commit" && git push
+$ git add . && git commit -m "Initial Commit" && git push
 ```
 
+Above mentioned is just an one time process. Later you can change anything, create a new post and just run following command.
+
+```bash
+& git add . && git commit && git push
+```
 
 
