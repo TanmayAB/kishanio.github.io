@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>The Library of Ossus : CCAvenue Ruby Gem</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">@kishanio</a></h1>
+            <a class="extra" href="/">home</a>
+          </div>
+
+          <h2>CCAvenue Ruby Gem</h2>
+<p class="meta">15 Mar 2014</p>
+
+<div class="post">
+<p><strong>Motivation</strong></p>
+
+<p>I wrote this <a href="http://rubylearning.com/blog/2010/12/14/ruby-gems-%E2%80%94-what-why-and-how/">Gem</a>  whilst working on <a href="http://printajoy.com">printajoy</a>. It enables you integrate <a href="http://ccavenue.com">CCAvenue Payment Gateway</a> with your existing Ruby application.</p>
+
+<p><strong>What is a Gem?</strong></p>
+
+<p>Gem are packages that work as standalone application or can be used to enhance functionality of existing application.</p>
+
+<p><strong>Research</strong></p>
+
+<ol>
+<li><a href="https://github.com/meshbrain/active_merchant_ccavenue">Active Merchant CCAvenue</a> - At first shot it didn&#39;t work. Beside it relies on Active Merchant. </li>
+</ol>
+
+<p><strong>Download</strong></p>
+
+<p>Rubygems.org: <a href="https://rubygems.org/gems/ccavenue">https://rubygems.org/gems/ccavenue</a></p>
+
+<p>Github: <a href="http://github.com/kishanio/CCAvenue-Ruby-Gem">http://github.com/kishanio/CCAvenue-Ruby-Gem</a></p>
+
+<p><strong>Usage</strong></p>
+
+<p>Pre-requistes: </p>
+
+<ol>
+<li>Merchant Id</li>
+<li>Merchant Working Key</li>
+<li>Redirect Url</li>
+</ol>
+
+<p>All the above three are available on the <a href="https://mars.ccavenue.com/mer_register/memberLogin_ccav.jsp?logintype=m">CCAvenue Merchant Dashboard</a></p>
+
+<p>This should just work fine.</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>gem install ccavenue
+</code></pre></div>
+<p><em>Rails</em> Specific Installation.</p>
+
+<p>Gemfile</p>
+<div class="highlight"><pre><code class="yaml language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">gem &#39;ccavenue&#39;</span>
+</code></pre></div>
+<p>Call bundle install</p>
+<div class="highlight"><pre><code class="bash language-bash" data-lang="bash"><span class="nv">$ </span>bundle install
+</code></pre></div>
+<p>application_controller.rb</p>
+<div class="highlight"><pre><code class="ruby language-ruby" data-lang="ruby"><span class="c1"># Create an instance with merchantid, workingkey and redirect url as parameter</span>
+<span class="k">def</span> <span class="nf">ccavenue</span>
+    <span class="k">return</span> <span class="vi">@ccavenue</span> <span class="o">=</span> <span class="no">Ccavenue</span><span class="o">::</span><span class="no">Payment</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="o">&lt;</span><span class="ss">TODO</span><span class="p">:</span> <span class="no">MERCHANT</span> <span class="no">ID</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="ss">TODO</span><span class="p">:</span> <span class="no">MERCHANT</span> <span class="no">WORKING</span> <span class="no">KEY</span><span class="o">&gt;</span><span class="p">,</span><span class="o">&lt;</span><span class="ss">TODO</span><span class="p">:</span> <span class="no">REDIRECT</span> <span class="no">URL</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>Orders page from which user will be redirected to payment gateway.</p>
+<div class="highlight"><pre><code class="ruby language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">send_to_ccavenue</span>
+
+
+    <span class="c1"># Merchant id needed in view</span>
+    <span class="vi">@CCAVENUE_MERCHANT_ID</span> <span class="o">=</span> <span class="o">&lt;</span><span class="ss">TODO</span><span class="p">:</span> <span class="no">MERCHANT</span> <span class="no">ID</span><span class="o">&gt;</span>
+
+    <span class="c1"># CCAvenue requires a new order id for each request </span>
+    <span class="c1"># so if transaction fails we can use #same ones again accross our website.</span>
+    <span class="n">order_id</span> <span class="o">=</span>  <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%d%m%H%L&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="o">&lt;</span><span class="ss">TODO</span><span class="p">:</span> <span class="no">Order</span> <span class="no">Id</span><span class="o">&gt;</span>
+
+    <span class="c1"># Parameters:</span>
+    <span class="c1">#</span>
+    <span class="c1">#   order_id</span>
+    <span class="c1">#   price</span>
+    <span class="c1">#   billing_name</span>
+    <span class="c1">#   billing_address</span>
+    <span class="c1">#   billing_city</span>
+    <span class="c1">#   billing_zip</span>
+    <span class="c1">#   billing_state</span>
+    <span class="c1">#   billing_country</span>
+    <span class="c1">#   billing_email</span>
+    <span class="c1">#   billing_phone</span>
+    <span class="c1">#   billing_notes</span>
+    <span class="c1">#   delivery_name</span>
+    <span class="c1">#   delivery_address</span>
+    <span class="c1">#   delivery_city</span>
+    <span class="c1">#   delivery_zip</span>
+    <span class="c1">#   delivery_state</span>
+    <span class="c1">#   delivery_country</span>
+    <span class="c1">#   delivery_email</span>
+    <span class="c1">#   delivery_phone</span>
+    <span class="c1">#   delivery_notes</span>
+    <span class="c1">#</span>
+    <span class="c1">#</span>
+    <span class="c1">#   Mandatory - order_id,price,billing_name,billing_address,billing_city,billing_zip,billing_state,billing_country,billing_email,billing_phone</span>
+    <span class="c1">#   Optional - billing_notes,delivery_name,delivery_address,delivery_city,delivery_zip,delivery_state,delivery_country,delivery_email,delivery_phone,delivery_notes</span>
+
+    <span class="c1"># Creating encrypted data</span>
+    <span class="vi">@encRequest</span> <span class="o">=</span> <span class="n">ccavenue</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">order_id</span><span class="p">,</span><span class="o">&lt;</span><span class="ss">TODO</span><span class="p">:</span> <span class="no">Price</span><span class="o">&gt;</span><span class="p">,</span><span class="vi">@order</span><span class="o">.</span><span class="n">full_name</span><span class="p">,</span><span class="s2">&quot;</span><span class="si">#{</span><span class="vi">@order</span><span class="o">.</span><span class="n">address1</span><span class="si">}</span><span class="s2"> ,</span><span class="si">#{</span><span class="vi">@order</span><span class="o">.</span><span class="n">address2</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span><span class="vi">@order</span><span class="o">.</span><span class="n">city</span><span class="p">,</span><span class="vi">@order</span><span class="o">.</span><span class="n">zip</span><span class="p">,</span><span class="vi">@order</span><span class="o">.</span><span class="n">state</span><span class="p">,</span><span class="vi">@order</span><span class="o">.</span><span class="n">country</span><span class="p">,</span><span class="vi">@order</span><span class="o">.</span><span class="n">email</span><span class="p">,</span><span class="vi">@order</span><span class="o">.</span><span class="n">phone</span><span class="p">)</span>
+
+    <span class="n">render</span> <span class="s2">&quot;&lt;TODO: Redirect Page&gt;&quot;</span>
+<span class="k">end</span>
+</code></pre></div>
+<p>A redirect view has to be renderend that creates a post request for the payment gateway.</p>
+<div class="highlight"><pre><code class="html language-html" data-lang="html"><span class="nt">&lt;form</span> <span class="na">id=</span><span class="s">&quot;redirect&quot;</span> <span class="na">method=</span><span class="s">&quot;post&quot;</span> <span class="na">name=</span><span class="s">&quot;redirect&quot;</span> <span class="na">action=</span><span class="s">&quot;http://www.ccavenue.com/shopzone/cc_details.jsp&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;encRequest&quot;</span> <span class="na">value=</span><span class="s">&quot;&lt;%= @encRequest %&gt;&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name=</span><span class="s">&quot;Merchant_Id&quot;</span> <span class="na">value=</span><span class="s">&quot;&lt;%=@CCAVENUE_MERCHANT_ID%&gt;&quot;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;/form&gt;</span>
+
+<span class="nt">&lt;script&gt;</span>
+    <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;redirect&quot;</span><span class="p">).</span><span class="nx">submit</span><span class="p">();</span>   
+<span class="nt">&lt;/script&gt;</span>
+</code></pre></div>
+<p>CCAvenue confirmation method. This is called by CCAvenue upon callback.</p>
+<div class="highlight"><pre><code class="ruby language-ruby" data-lang="ruby"><span class="c1"># Method post </span>
+<span class="k">def</span> <span class="nf">payment_confirm</span>  
+
+    <span class="c1"># parameter to response is encrypted reponse we get from CCavenue</span>
+    <span class="n">authDesc</span><span class="p">,</span><span class="n">verify</span><span class="p">,</span><span class="n">data</span> <span class="o">=</span> <span class="n">ccavenue</span><span class="o">.</span><span class="n">response</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="s1">&#39;encResponse&#39;</span><span class="o">]</span><span class="p">)</span>
+
+    <span class="c1"># Return parameters:</span>
+    <span class="c1">#   Auth Description: &lt;String: Payment Failed/Success&gt;</span>
+    <span class="c1">#   Checksum Verification &lt;Bool: True/False&gt;</span>
+    <span class="c1">#   Response Data: &lt;HASH/Array: Order_id, amount etc&gt;</span>
+
+
+
+    <span class="n">order_Id</span> <span class="o">=</span> <span class="n">data</span><span class="o">[</span><span class="s2">&quot;Order_Id&quot;</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span>
+
+<span class="k">end</span>
+</code></pre></div>
+<p><strong>Licence</strong></p>
+
+<p>It&#39;s Licenced under <a href="https://raw.github.com/kishanio/CCAvenue-Ruby-Gem/master/LICENSE.txt">MIT</a></p>
+
+
+
+	
+<br><hr>
+<div id="disqus_thread"></div>
+<script type="text/javascript">
+/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+var disqus_shortname = 'kishanio'; // required: replace example with your forum shortname
+
+/* * * DON'T EDIT BELOW THIS LINE * * */
+(function() {
+var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</div>
+
+    
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Emotion, yet peace.<br />
+                Ignorance, yet knowledge.<br/>
+                Passion, yet serenity.<br/>
+                Chaos, yet harmony.<br/>
+                Death, yet the Force.<br/>
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                Github: <a href="https://github.com/kishanio">kishanio</a><br />
+                Twitter: <a href="https://twitter.com/kishanio">@kishanio</a><br />
+                Facebook: <a href="https://facebook.com/kishanio">kishanio</a><br />
+                IRC: kishanio (freenode)<br/>
+                Email: thobhanikishan (at) gmail (dot) com
+              </p>
+            </div>
+          </div>
+        </div>
+        
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-48962832-1', 'kishanio.github.io');
+        ga('send', 'pageview');
+    </script>
+    </body>
+</html>
