@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://kishanio.github.io/2014/03/15/manage-configuration-rails.html</loc>
+    
+    <lastmod>2014-03-15T00:00:00+05:30</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kishanio.github.io/2014/03/15/ccavenue-ruby-gem.html</loc>
+    
+    <lastmod>2014-03-15T00:00:00+05:30</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://kishanio.github.io/2014/03/14/getting-started-jekyll-part-1.html</loc>
+    
+    <lastmod>2014-03-14T00:00:00+05:30</lastmod>
+    
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  
+  
+  
+  
+  
+</urlset>

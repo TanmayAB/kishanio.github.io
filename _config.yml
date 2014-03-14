@@ -2,3 +2,6 @@ name: kishanio
 username: kishanio
 markdown: redcarpet
 pygments: true
+safe: true
+lsi: true
+baseurl: http://kishanio.github.io
